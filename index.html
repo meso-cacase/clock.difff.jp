@@ -107,12 +107,6 @@ function clock(id){
 			}, 1000 - Date.now() % 1000);
 		}
 	}
-	this.stop = function() {
-		if (this.timerId) {
-			clearInterval(this.timerId);
-			this.timerId = null;
-		}
-	}
 }
 window.onload = function(){
 	var x = new clock('sample20130319');
