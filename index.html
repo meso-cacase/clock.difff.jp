@@ -101,7 +101,10 @@ function clock(id){
 		if (!this.timerId) {
 			var _clock = this;
 			_clock.ticktack();
-			this.timerId = setInterval(function(){_clock.ticktack();}, 1000);
+			this.timerId = setTimeout(function main(){
+				_clock.ticktack();
+				setTimeout(main, 1000 - Date.now() % 1000);
+			}, 1000 - Date.now() % 1000);
 		}
 	}
 	this.stop = function() {
