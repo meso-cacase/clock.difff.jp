@@ -20,18 +20,33 @@ function clock(id){
 		x.translate(this.width / 2, this.height / 2);
 		x.scale(this.width / 200, this.height / 200);
 		x.rotate(-Math.PI/2);
-		x.strokeStyle = 'black';
+		x.strokeStyle = 'white';
 		x.fillStyle = 'white';
 		x.lineCap = 'butt';
+	}
+	this.mojiban = function(){
+		var x = this.ctx;
+		x.save();
+		x.font = '19px Helvetica';
+		x.textAlign = 'center';
+		x.textBaseline = 'middle';
+		x.rotate(Math.PI/2);
+		for (var i = 0; i < 12; i++) {
+			var xi =  78 * Math.sin(i * Math.PI / 6);
+			var yi = -78 * Math.cos(i * Math.PI / 6);
+			var text = '' + (i == 0 ? '12' : i);
+			x.fillText(text, xi, yi);
+		}
+		x.restore();
 	}
 	this.memoriM = function(){
 		var x = this.ctx;
 		x.save();
-		x.lineWidth = 2;
+		x.lineWidth = 1;
 		for (var i = 0; i < 60; i++) {
 			x.beginPath();
 			x.rotate(Math.PI/30);
-			x.moveTo(90,0);
+			x.moveTo(96,0);
 			x.lineTo(100,0);
 			x.stroke();
 		}
@@ -40,11 +55,11 @@ function clock(id){
 	this.memoriH = function(){
 		var x = this.ctx;
 		x.save();
-		x.lineWidth = 8;
+		x.lineWidth = 2;
 		for (var i = 0; i < 12; i++) {
 			x.beginPath();
 			x.rotate(Math.PI/6);
-			x.moveTo(80,0);
+			x.moveTo(93,0);
 			x.lineTo(100,0);
 			x.stroke();
 		}
@@ -54,7 +69,8 @@ function clock(id){
 		var x = this.ctx;
 		x.save();
 		x.rotate(Math.PI/6 * (this.datetime.getHours() + this.datetime.getMinutes() / 60));
-		x.lineWidth = 8;
+		x.lineCap = 'round';
+		x.lineWidth = 7;
 		x.beginPath();
 		x.moveTo(-5, 0);
 		x.lineTo(60, 0);
@@ -65,10 +81,11 @@ function clock(id){
 		var x = this.ctx;
 		x.save();
 		x.rotate(Math.PI/30 * (this.datetime.getMinutes() + this.datetime.getSeconds() / 60));
-		x.lineWidth = 4;
+		x.lineCap = 'round';
+		x.lineWidth = 5;
 		x.beginPath();
 		x.moveTo(-5, 0);
-		x.lineTo(80, 0);
+		x.lineTo(92, 0);
 		x.stroke();
 		x.restore();
 	}
@@ -76,12 +93,27 @@ function clock(id){
 		var x = this.ctx;
 		x.save();
 		x.rotate(Math.PI/30 * this.datetime.getSeconds());
-		x.strokeStyle = '#cc0000';
-		x.lineWidth = 2;
+		x.strokeStyle = 'orange';
+		x.lineCap = 'round';
+		x.lineWidth = 2.5;
 		x.beginPath();
-		x.moveTo(-10, 0);
-		x.lineTo(80, 0);
+		x.moveTo(0, 0);
+		x.lineTo(93, 0);
 		x.stroke();
+		x.lineWidth = 5;
+		x.beginPath();
+		x.moveTo(-15, 0);
+		x.lineTo(0, 0);
+		x.stroke();
+		x.restore();
+	}
+	this.circle = function(){
+		var x = this.ctx;
+		x.save();
+		x.fillStyle = 'orange';
+		x.beginPath();
+		x.arc(0, 0, 9, 0, Math.PI * 2);
+		x.fill();
 		x.restore();
 	}
 	this.ticktack = function(){
@@ -91,11 +123,13 @@ function clock(id){
 		this.datetime = new Date();
 		var x = this.ctx;
 		x.clearRect(-100, -100, 200, 200);
+		this.mojiban();
 		this.memoriM();
 		this.memoriH();
 		this.h();
 		this.m();
 		this.s();
+		this.circle();
 	}
 	this.start = function(){
 		if (!this.timerId) {
@@ -109,12 +143,12 @@ function clock(id){
 	}
 }
 window.onload = function(){
-	var x = new clock('sample20130319');
+	var x = new clock('sample20220505');
 	x.start();
 }
 </script>
 </head>
-<body>
-<div><canvas id=sample20130319 width=200 height=200></canvas></div>
+<body bgcolor=black>
+<div><canvas id=sample20220505 width=200 height=200></canvas></div>
 </body>
 </html>
