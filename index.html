@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
 <title>Clock</title>
-<script src="jquery-3.6.0.min.js"></script>
 <script>
 	// SOFTELメモ Developer's blog -【JavaScript】canvasでアナログ時計
 	// https://www.softel.co.jp/blogs/tech/archives/3914
@@ -113,11 +112,10 @@ function clock(id){
     }
 }
 
-//開始処理(jQueryがないときはwindow.onloadなどで)
-$(function(){
+window.onload = function(){
     var x = new clock('sample20130319');
     x.start();
-});
+}
 </script>
 </head>
 <body>
